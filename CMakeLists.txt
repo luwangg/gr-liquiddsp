@@ -60,7 +60,7 @@ set(Boost_ADDITIONAL_VERSIONS
 find_package(Boost "1.35" COMPONENTS filesystem system)
 
 if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost required to compile liquiddsp")
+    message(FATAL_ERROR "Boost required to compile gr-liquiddsp")
 endif()
 
 ########################################################################
@@ -83,23 +83,23 @@ set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 ########################################################################
 # Find gnuradio build dependencies
 ########################################################################
-find_package(GnuradioRuntime)
-find_package(CppUnit)
-
 # To run a more advanced search for GNU Radio and it's components and
 # versions, use the following. Add any components required to the list
 # of GR_REQUIRED_COMPONENTS (in all caps) and change "version" to the
 # minimum API compatible version required.
 #
-# set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS FILTER ...)
-# find_package(Gnuradio "version")
+set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS FFT FILTER)
+find_package(Gnuradio "3.7.0" REQUIRED)
 
-if(NOT GNURADIO_RUNTIME_FOUND)
-    message(FATAL_ERROR "GnuRadio Runtime required to compile liquiddsp")
-endif()
+find_package(CppUnit)
 if(NOT CPPUNIT_FOUND)
-    message(FATAL_ERROR "CppUnit required to compile liquiddsp")
+    message(FATAL_ERROR "CppUnit required to compile gr-liquiddsp")
 endif()
+
+# SETUP LIQUIDDSP locations
+set(LIQUID_INCLUDE_DIRS /opt/gr/include)
+set(LIQUID_LIBRARY_DIRS /opt/gr/lib)
+set(LIQUID_LIBRARIES liquid)
 
 ########################################################################
 # Setup the include and linker paths
@@ -108,12 +108,14 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
-    ${GNURADIO_RUNTIME_INCLUDE_DIRS}
+    ${LIQUID_INCLUDE_DIRS}
+    ${GNURADIO_ALL_INCLUDE_DIRS}
 )
 
 link_directories(
     ${Boost_LIBRARY_DIRS}
     ${CPPUNIT_LIBRARY_DIRS}
+    ${LIQUID_LIBRARY_DIRS}
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
 )
 
