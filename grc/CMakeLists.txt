@@ -19,5 +19,6 @@
 
 install(FILES
     liquiddsp_fft.xml
-    liquiddsp_iir_filter_ccf.xml DESTINATION share/gnuradio/grc/blocks
+    liquiddsp_iir_filter_ccf.xml
+    liquiddsp_fir_filter.xml DESTINATION share/gnuradio/grc/blocks
 )

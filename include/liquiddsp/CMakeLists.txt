@@ -23,5 +23,6 @@
 install(FILES
     api.h
     fft.h
-    iir_filter_ccf.h DESTINATION include/liquiddsp
+    iir_filter_ccf.h
+    fir_filter.h DESTINATION include/liquiddsp
 )

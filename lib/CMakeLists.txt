@@ -28,10 +28,17 @@ link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND liquiddsp_sources
     fft_impl.cc
     iir_filter_ccf_impl.cc
+    fir_filter_impl.cc
+)
+
+set(gr_liquid_libraries
+  ${Boost_LIBRARIES}
+  ${LIQUID_LIBRARIES}
+  ${GNURADIO_ALL_LIBRARIES}
 )
 
 add_library(gnuradio-liquiddsp SHARED ${liquiddsp_sources})
-target_link_libraries(gnuradio-liquiddsp ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} liquid)
+target_link_libraries(gnuradio-liquiddsp ${gr_liquid_libraries})
 set_target_properties(gnuradio-liquiddsp PROPERTIES DEFINE_SYMBOL "gnuradio_liquiddsp_EXPORTS")
 
 ########################################################################
