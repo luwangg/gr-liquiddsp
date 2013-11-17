@@ -17,9 +17,9 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-include(GrPython)
-
-GR_PYTHON_INSTALL(
-    PROGRAMS
-    DESTINATION bin
-)
+#include(GrPython)
+#
+#GR_PYTHON_INSTALL(
+#    PROGRAMS
+#    DESTINATION bin
+#)

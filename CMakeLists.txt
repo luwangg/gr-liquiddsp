@@ -96,10 +96,16 @@ if(NOT CPPUNIT_FOUND)
     message(FATAL_ERROR "CppUnit required to compile gr-liquiddsp")
 endif()
 
+find_package(Liquid)
+
 # SETUP LIQUIDDSP locations
-set(LIQUID_INCLUDE_DIRS /opt/gr/include)
-set(LIQUID_LIBRARY_DIRS /opt/gr/lib)
-set(LIQUID_LIBRARIES liquid)
+message("--> INCDIR: ${LIQUID_INCLUDE_DIRS}")
+message("--> LIBDIR: ${LIQUID_LIBRARY_DIRS}")
+message("--> LIBS    ${LIQUID_LIBRARIES}")
+
+if(NOT LIQUID_FOUND)
+    message(FATAL_ERROR "LiquidDSP required to compile gr-liquiddsp")
+endif()
 
 ########################################################################
 # Setup the include and linker paths
